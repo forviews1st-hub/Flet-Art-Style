@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aura-cafe-v2';
+const CACHE_NAME = 'aura-cafe-v9';
 const OFFLINE_URL = '/offline.html';
 
 const PRECACHE_URLS = [
@@ -73,7 +73,7 @@ self.addEventListener('fetch', (event) => {
       }).catch(() => {
         if (req.destination === 'image') {
           return new Response(
-            '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdf6ec"/><stop offset="100%" stop-color="#f5e6d3"/></linearGradient></defs><rect width="200" height="200" fill="url(#g)"/><text x="100" y="115" font-size="70" text-anchor="middle"></text></svg>',
+            '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdf6ec"/><stop offset="100%" stop-color="#f5e6d3"/></linearGradient></defs><rect width="200" height="200" fill="url(#g)"/><text x="100" y="115" font-size="70" text-anchor="middle">🍽️</text></svg>',
             { headers: { 'Content-Type': 'image/svg+xml' } }
           );
         }
