@@ -582,7 +582,7 @@
             <form class="admin-form" id="socialForm">
               <div class="form-group"><label>Instagram URL</label><input type="text" id="socialInstagram" placeholder="https://instagram.com/yourusername" /></div>
               <div class="form-group"><label>Facebook URL</label><input type="text" id="socialFacebook" placeholder="https://facebook.com/yourpage" /></div>
-              <div class="form-group"><label>WhatsApp Number</label><input type="text" id="socialWhatsApp" placeholder="+61 478 706 251" /></div>
+              <div class="form-group"><label>WhatsApp Number</label><input type="text" id="socialWhatsApp" placeholder="+1 212 555 0123" /></div>
               <button type="submit">💾 Save Social Links</button>
             </form>
           </div>
@@ -610,8 +610,8 @@
         <div class="section-title">Info</div>
         <div class="admin-contact-controls" id="adminContactControls">
           <form id="contactInlineForm">
-            <div class="form-group"><label>Address</label><textarea id="contactInlineAddress" rows="2" required>279 Prospect Rd, Blair Athol SA 5084, Australia</textarea></div>
-            <div class="form-group"><label>Phone</label><input type="text" id="contactInlinePhone" value="+61 478 706 251" required /></div>
+            <div class="form-group"><label>Address</label><textarea id="contactInlineAddress" rows="2" required>123 Broadway Avenue, New York, NY 10001, USA</textarea></div>
+            <div class="form-group"><label>Phone</label><input type="text" id="contactInlinePhone" value="+1 212 555 0123" required /></div>
             <div class="form-group"><label>Opening Hours</label><input type="text" id="contactInlineHours" value="Monday – Sunday, 6:00 AM – 9:00 PM" required /></div>
             <button type="submit">💾 Save Contact</button>
           </form>
@@ -630,8 +630,8 @@
           </a>
         </div>
         <div class="info-grid">
-          <div class="info-card" id="addressCard"><h4>📍 Address</h4><p id="contactAddress">279 Prospect Rd,<br>Blair Athol SA 5084,<br>Australia</p></div>
-          <div class="info-card" id="phoneCard"><h4>📞 Phone</h4><p id="contactPhone">+61 478 706 251</p></div>
+          <div class="info-card" id="addressCard"><h4>📍 Address</h4><p id="contactAddress">123 Broadway Avenue,<br>New York, NY 10001,<br>USA</p></div>
+          <div class="info-card" id="phoneCard"><h4>📞 Phone</h4><p id="contactPhone">+1 212 555 0123</p></div>
           <div class="info-card" id="hoursCard"><h4>🕒 Opening Hours</h4><p id="contactHours">Monday – Sunday<br>6:00 AM – 9:00 PM</p></div>
         </div>
       </section>
@@ -923,41 +923,41 @@
     var customers = [];
     var currentCustomer = null;
     var wishlistItems = [];
-    var contactInfo = { address: '279 Prospect Rd, Blair Athol SA 5084, Australia', phone: '+61 478 706 251', hours: 'Monday – Sunday, 6:00 AM – 9:00 PM', social: { instagram: '', facebook: '', whatsapp: '+61 478 706 251' } };
+    var contactInfo = { address: '123 Broadway Avenue, New York, NY 10001, USA', phone: '+1 212 555 0123', hours: 'Monday – Sunday, 6:00 AM – 9:00 PM', social: { instagram: '', facebook: '', whatsapp: '+1 212 555 0123' } };
 
     function loadData() {
       var CURRENT_VERSION = '2.3.6';
-      var storedVersion = localStorage.getItem('samoon99_version');
-      if (storedVersion !== CURRENT_VERSION) { localStorage.clear(); localStorage.setItem('samoon99_version', CURRENT_VERSION); }
+      var storedVersion = localStorage.getItem('Aura-Cafe_version');
+      if (storedVersion !== CURRENT_VERSION) { localStorage.clear(); localStorage.setItem('Aura-Cafe_version', CURRENT_VERSION); }
       try {
-        products = JSON.parse(localStorage.getItem('samoon99_products')) || defaultProducts.slice(); saveProducts();
-        categories = JSON.parse(localStorage.getItem('samoon99_categories')) || defaultCategories.slice(); saveCategories();
-        galleryImages = JSON.parse(localStorage.getItem('samoon99_gallery')) || defaultGallery.slice(); saveGallery();
-        orders = JSON.parse(localStorage.getItem('samoon99_orders')) || []; saveOrders();
-        bookings = JSON.parse(localStorage.getItem('samoon99_bookings')) || [];
-        cart = JSON.parse(localStorage.getItem('samoon99_cart')) || []; saveCart();
-        reviews = JSON.parse(localStorage.getItem('samoon99_reviews')) || []; saveReviews();
-        loyaltyPoints = JSON.parse(localStorage.getItem('samoon99_loyalty')) || {}; saveLoyalty();
-        customers = JSON.parse(localStorage.getItem('samoon99_customers')) || []; saveCustomers();
-        currentCustomer = JSON.parse(localStorage.getItem('samoon99_currentCustomer')) || null;
-        wishlistItems = JSON.parse(localStorage.getItem('samoon99_wishlist')) || [];
-        contactInfo = JSON.parse(localStorage.getItem('samoon99_contact')) || contactInfo; saveContact();
+        products = JSON.parse(localStorage.getItem('Aura-Cafe_products')) || defaultProducts.slice(); saveProducts();
+        categories = JSON.parse(localStorage.getItem('Aura-Cafe_categories')) || defaultCategories.slice(); saveCategories();
+        galleryImages = JSON.parse(localStorage.getItem('Aura-Cafe_gallery')) || defaultGallery.slice(); saveGallery();
+        orders = JSON.parse(localStorage.getItem('Aura-Cafe_orders')) || []; saveOrders();
+        bookings = JSON.parse(localStorage.getItem('Aura-Cafe_bookings')) || [];
+        cart = JSON.parse(localStorage.getItem('Aura-Cafe_cart')) || []; saveCart();
+        reviews = JSON.parse(localStorage.getItem('Aura-Cafe_reviews')) || []; saveReviews();
+        loyaltyPoints = JSON.parse(localStorage.getItem('Aura-Cafe_loyalty')) || {}; saveLoyalty();
+        customers = JSON.parse(localStorage.getItem('Aura-Cafe_customers')) || []; saveCustomers();
+        currentCustomer = JSON.parse(localStorage.getItem('Aura-Cafe_currentCustomer')) || null;
+        wishlistItems = JSON.parse(localStorage.getItem('Aura-Cafe_wishlist')) || [];
+        contactInfo = JSON.parse(localStorage.getItem('Aura-Cafe_contact')) || contactInfo; saveContact();
       } catch(e) { products = defaultProducts.slice(); categories = defaultCategories.slice(); galleryImages = defaultGallery.slice(); orders = []; cart = []; reviews = []; loyaltyPoints = {}; customers = []; currentCustomer = null; wishlistItems = []; bookings = []; saveAll(); }
       updateContactUI(); updateSocialLinksUI(); updateCustomerUI();
     }
     function saveAll() { saveProducts(); saveCategories(); saveGallery(); saveOrders(); saveCart(); saveReviews(); saveLoyalty(); saveContact(); saveCustomers(); saveWishlist(); saveBookings(); }
-    function saveProducts() { localStorage.setItem('samoon99_products', JSON.stringify(products)); }
-    function saveCategories() { localStorage.setItem('samoon99_categories', JSON.stringify(categories)); }
-    function saveGallery() { localStorage.setItem('samoon99_gallery', JSON.stringify(galleryImages)); }
-    function saveOrders() { localStorage.setItem('samoon99_orders', JSON.stringify(orders)); }
-    function saveBookings() { localStorage.setItem('samoon99_bookings', JSON.stringify(bookings)); }
-    function saveCart() { localStorage.setItem('samoon99_cart', JSON.stringify(cart)); }
-    function saveReviews() { localStorage.setItem('samoon99_reviews', JSON.stringify(reviews)); }
-    function saveLoyalty() { localStorage.setItem('samoon99_loyalty', JSON.stringify(loyaltyPoints)); }
-    function saveContact() { localStorage.setItem('samoon99_contact', JSON.stringify(contactInfo)); }
-    function saveCustomers() { localStorage.setItem('samoon99_customers', JSON.stringify(customers)); }
-    function saveWishlist() { localStorage.setItem('samoon99_wishlist', JSON.stringify(wishlistItems)); }
-    function saveCurrentCustomer() { if (currentCustomer) localStorage.setItem('samoon99_currentCustomer', JSON.stringify(currentCustomer)); else localStorage.removeItem('samoon99_currentCustomer'); }
+    function saveProducts() { localStorage.setItem('Aura-Cafe_products', JSON.stringify(products)); }
+    function saveCategories() { localStorage.setItem('Aura-Cafe_categories', JSON.stringify(categories)); }
+    function saveGallery() { localStorage.setItem('Aura-Cafe_gallery', JSON.stringify(galleryImages)); }
+    function saveOrders() { localStorage.setItem('Aura-Cafe_orders', JSON.stringify(orders)); }
+    function saveBookings() { localStorage.setItem('Aura-Cafe_bookings', JSON.stringify(bookings)); }
+    function saveCart() { localStorage.setItem('Aura-Cafe_cart', JSON.stringify(cart)); }
+    function saveReviews() { localStorage.setItem('Aura-Cafe_reviews', JSON.stringify(reviews)); }
+    function saveLoyalty() { localStorage.setItem('Aura-Cafe_loyalty', JSON.stringify(loyaltyPoints)); }
+    function saveContact() { localStorage.setItem('Aura-Cafe_contact', JSON.stringify(contactInfo)); }
+    function saveCustomers() { localStorage.setItem('Aura-Cafe_customers', JSON.stringify(customers)); }
+    function saveWishlist() { localStorage.setItem('Aura-Cafe_wishlist', JSON.stringify(wishlistItems)); }
+    function saveCurrentCustomer() { if (currentCustomer) localStorage.setItem('Aura-Cafe_currentCustomer', JSON.stringify(currentCustomer)); else localStorage.removeItem('Aura-Cafe_currentCustomer'); }
 
     function updateContactUI() { document.getElementById('contactAddress').innerHTML = contactInfo.address.replace(/\n/g, '<br>'); document.getElementById('contactPhone').textContent = contactInfo.phone; document.getElementById('contactHours').innerHTML = contactInfo.hours.replace(/\n/g, '<br>'); document.getElementById('contactInlineAddress').value = contactInfo.address; document.getElementById('contactInlinePhone').value = contactInfo.phone; document.getElementById('contactInlineHours').value = contactInfo.hours; }
     function updateSocialLinksUI() { document.getElementById('socialInstagram').value = contactInfo.social.instagram || ''; document.getElementById('socialFacebook').value = contactInfo.social.facebook || ''; document.getElementById('socialWhatsApp').value = contactInfo.social.whatsapp || ''; var instaCard = document.getElementById('instagramSocialCard'); var fbCard = document.getElementById('facebookSocialCard'); if (contactInfo.social.instagram) { instaCard.href = contactInfo.social.instagram; instaCard.setAttribute('data-url', contactInfo.social.instagram); } else { instaCard.href = '#'; instaCard.removeAttribute('data-url'); } if (contactInfo.social.facebook) { fbCard.href = contactInfo.social.facebook; fbCard.setAttribute('data-url', contactInfo.social.facebook); } else { fbCard.href = '#'; fbCard.removeAttribute('data-url'); } }
@@ -976,9 +976,9 @@
     function sendOrderNotification(order, customerEmail) { }
     var isLoggedIn = false;
     var adminCredentials = { email: 'Owner@Gmail.com', password: 'admin123' };
-    function adminLogin(email, password) { if (email.toLowerCase() === adminCredentials.email.toLowerCase() && password === adminCredentials.password) { isLoggedIn = true; localStorage.setItem('samoon99_loggedin', 'true'); updateCustomerUI(); document.getElementById('adminPanel').classList.add('active'); document.getElementById('ownerOrdersPanel').style.display = 'block'; document.getElementById('adminGalleryControls').classList.add('active'); document.getElementById('adminContactControls').classList.add('active'); document.getElementById('customerAuthOverlay').style.display = 'none'; document.getElementById('ownerLoginError').textContent = ''; updateNotifBadge(); renderAll(); showToast('Welcome back, Owner! 👑', 'success'); return true; } else { document.getElementById('ownerLoginError').textContent = 'Invalid email or password'; return false; } }
-    function checkLogin() { if (localStorage.getItem('samoon99_loggedin') === 'true') { isLoggedIn = true; updateCustomerUI(); document.getElementById('adminPanel').classList.add('active'); document.getElementById('ownerOrdersPanel').style.display = 'block'; document.getElementById('adminGalleryControls').classList.add('active'); document.getElementById('adminContactControls').classList.add('active'); updateNotifBadge(); } }
-    async function logout() { if (await confirm('Logout?')) { isLoggedIn = false; localStorage.removeItem('samoon99_loggedin'); updateCustomerUI(); document.getElementById('adminPanel').classList.remove('active'); document.getElementById('ownerOrdersPanel').style.display = 'none'; document.getElementById('adminGalleryControls').classList.remove('active'); document.getElementById('adminContactControls').classList.remove('active'); renderAll(); showToast('Logged out', 'info'); } }
+    function adminLogin(email, password) { if (email.toLowerCase() === adminCredentials.email.toLowerCase() && password === adminCredentials.password) { isLoggedIn = true; localStorage.setItem('Aura-Cafe_loggedin', 'true'); updateCustomerUI(); document.getElementById('adminPanel').classList.add('active'); document.getElementById('ownerOrdersPanel').style.display = 'block'; document.getElementById('adminGalleryControls').classList.add('active'); document.getElementById('adminContactControls').classList.add('active'); document.getElementById('customerAuthOverlay').style.display = 'none'; document.getElementById('ownerLoginError').textContent = ''; updateNotifBadge(); renderAll(); showToast('Welcome back, Owner! 👑', 'success'); return true; } else { document.getElementById('ownerLoginError').textContent = 'Invalid email or password'; return false; } }
+    function checkLogin() { if (localStorage.getItem('Aura-Cafe_loggedin') === 'true') { isLoggedIn = true; updateCustomerUI(); document.getElementById('adminPanel').classList.add('active'); document.getElementById('ownerOrdersPanel').style.display = 'block'; document.getElementById('adminGalleryControls').classList.add('active'); document.getElementById('adminContactControls').classList.add('active'); updateNotifBadge(); } }
+    async function logout() { if (await confirm('Logout?')) { isLoggedIn = false; localStorage.removeItem('Aura-Cafe_loggedin'); updateCustomerUI(); document.getElementById('adminPanel').classList.remove('active'); document.getElementById('ownerOrdersPanel').style.display = 'none'; document.getElementById('adminGalleryControls').classList.remove('active'); document.getElementById('adminContactControls').classList.remove('active'); renderAll(); showToast('Logged out', 'info'); } }
     function updateNotifBadge() { var badge = document.getElementById('notifBadge'); if (orders.length > 0 && isLoggedIn) { badge.style.display = 'flex'; badge.textContent = orders.length; } else badge.style.display = 'none'; }
 
     function showToast(message, type) { var container = document.getElementById('toastContainer'); var toast = document.createElement('div'); toast.className = 'toast ' + (type || 'info'); var icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'; toast.innerHTML = '<span class="toast-icon">' + icon + '</span><span>' + message + '</span>'; container.appendChild(toast); setTimeout(function() { toast.remove(); }, 3000); }
@@ -1183,7 +1183,7 @@
     document.getElementById('bookingOverlay').addEventListener('click', function(e) { if (e.target === this) document.getElementById('bookingOverlay').style.display = 'none'; });
     document.getElementById('bookingForm').addEventListener('submit', function(e) { e.preventDefault(); var newBooking = { id: Date.now().toString(), customerName: document.getElementById('bookingName').value.trim(), phone: document.getElementById('bookingPhone').value.trim(), date: document.getElementById('bookingDate').value, time: document.getElementById('bookingTime').value, guests: document.getElementById('bookingGuests').value, specialReq: document.getElementById('bookingSpecialReq').value.trim(), timestamp: Date.now(), status: 'pending' }; bookings.push(newBooking); saveBookings(); renderAdminBookingsList(); document.getElementById('bookingOverlay').style.display = 'none'; document.getElementById('bookingForm').reset(); showToast('Table booked successfully! 🎉', 'success'); });
     document.getElementById('clearBookingsBtn').addEventListener('click', async function() { if (await confirm('Clear all bookings?')) { bookings = []; saveBookings(); renderAdminBookingsList(); showToast('All bookings cleared', 'success'); } });
-    document.getElementById('customerProfileBtn').addEventListener('click', async function() { if (isLoggedIn) { if (await confirm('Logout from admin?')) { isLoggedIn = false; localStorage.removeItem('samoon99_loggedin'); updateCustomerUI(); document.getElementById('adminPanel').classList.remove('active'); document.getElementById('ownerOrdersPanel').style.display = 'none'; document.getElementById('adminGalleryControls').classList.remove('active'); document.getElementById('adminContactControls').classList.remove('active'); renderAll(); showToast('Logged out', 'info'); } } else if (currentCustomer) { if (await confirm('Logout from customer account?')) { customerLogout(); showToast('Logged out', 'info'); } } else { document.getElementById('customerAuthOverlay').style.display = 'flex'; document.getElementById('customerAuthError').textContent = ''; document.getElementById('customerAuthTitle').textContent = 'Customer Login'; document.getElementById('customerAuthSubmit').innerHTML = '<i class="fas fa-sign-in-alt"></i> Login'; document.getElementById('customerNameGroup').style.display = 'none'; document.getElementById('customerEmail').value = ''; document.getElementById('customerPassword').value = ''; document.getElementById('customerName').value = ''; document.getElementById('ownerLoginError').textContent = ''; document.getElementById('ownerPassword').value = ''; switchAuthTab('customerPanel'); } });
+    document.getElementById('customerProfileBtn').addEventListener('click', async function() { if (isLoggedIn) { if (await confirm('Logout from admin?')) { isLoggedIn = false; localStorage.removeItem('Aura-Cafe_loggedin'); updateCustomerUI(); document.getElementById('adminPanel').classList.remove('active'); document.getElementById('ownerOrdersPanel').style.display = 'none'; document.getElementById('adminGalleryControls').classList.remove('active'); document.getElementById('adminContactControls').classList.remove('active'); renderAll(); showToast('Logged out', 'info'); } } else if (currentCustomer) { if (await confirm('Logout from customer account?')) { customerLogout(); showToast('Logged out', 'info'); } } else { document.getElementById('customerAuthOverlay').style.display = 'flex'; document.getElementById('customerAuthError').textContent = ''; document.getElementById('customerAuthTitle').textContent = 'Customer Login'; document.getElementById('customerAuthSubmit').innerHTML = '<i class="fas fa-sign-in-alt"></i> Login'; document.getElementById('customerNameGroup').style.display = 'none'; document.getElementById('customerEmail').value = ''; document.getElementById('customerPassword').value = ''; document.getElementById('customerName').value = ''; document.getElementById('ownerLoginError').textContent = ''; document.getElementById('ownerPassword').value = ''; switchAuthTab('customerPanel'); } });
     function switchAuthTab(panelId) { document.querySelectorAll('.auth-tab').forEach(tab => { tab.classList.remove('active'); if (tab.getAttribute('data-auth-tab') === panelId) tab.classList.add('active'); }); document.querySelectorAll('.auth-panel').forEach(panel => { panel.classList.remove('active'); }); document.getElementById(panelId).classList.add('active'); }
     document.querySelectorAll('.auth-tab').forEach(tab => { tab.addEventListener('click', function() { switchAuthTab(tab.getAttribute('data-auth-tab')); }); });
     document.getElementById('customerAuthForm').addEventListener('submit', function(e) { e.preventDefault(); var email = document.getElementById('customerEmail').value.trim(); var password = document.getElementById('customerPassword').value; var name = document.getElementById('customerName').value.trim(); var isRegisterMode = document.getElementById('customerNameGroup').style.display === 'block'; if (isRegisterMode) { if (!name) { document.getElementById('customerAuthError').textContent = 'Please enter your name'; return; } customerRegister(name, email, password); } else { customerLogin(email, password); } });
