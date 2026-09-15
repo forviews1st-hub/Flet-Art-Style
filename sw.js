@@ -1,9 +1,9 @@
-const CACHE_NAME = 'aura-cafe-v9';
+const CACHE_NAME = 'aura-cafe-v23';
 const OFFLINE_URL = '/offline.html';
 
 const PRECACHE_URLS = [
   '/', '/index.html', '/offline.html', '/manifest.json',
-  '/images/banner.png', '/images/book_table.png',
+  '/images/banner.png', '/images/book_table.png', '/images/card_frame.png',
   '/images/nav_menu.png', '/images/nav_gallery.png', '/images/nav_info.png', '/images/nav_orders.png',
   '/images/pepperoni_pizza.png', '/images/classic_cheeseburger.png',
   '/images/chocolate_banana_pancakes.png', '/images/classic_avocado_toast.png',
