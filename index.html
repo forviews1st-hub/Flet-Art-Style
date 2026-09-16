@@ -14,7 +14,7 @@
     * { -webkit-tap-highlight-color: transparent; }
     :focus { outline: none; }
     :focus-visible { outline: 2px solid #1A1A1A; outline-offset: 2px; border-radius: 4px; }
-    body { font-family:'Inter',sans-serif; background:#F5F5F5; min-height:100vh; width:100%; overflow-x:hidden; padding-bottom:80px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    body { font-family:'Inter',sans-serif; background:#F5F5F5; min-height:100vh; width:100%; overflow-x:hidden; padding-bottom:95px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
     .app { width:100%; min-height:100vh; background:#F5F5F5; }
     .header { position:relative; height:90px; background:#F5F5F5; padding:15px 20px; display:flex; align-items:center; z-index:500; }
     .header-row { display:flex; align-items:center; gap:12px; width:100%; }
@@ -340,13 +340,38 @@
     .admin-actions button { background:none; border:none; cursor:pointer; font-size:15px; margin-left:6px; transition:transform 0.15s; }
     .admin-actions button:hover { transform:scale(1.2); }
     .card.admin-mode { position:relative; }
-    .bottom-nav { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #eee; display:grid; grid-template-columns:repeat(4,1fr); align-items:center; padding:8px 0 10px; z-index:999; box-shadow:0 -2px 10px rgba(0,0,0,0.05); }
-    .bottom-nav-btn { background:none; border:none; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; transition:all 0.2s; padding:4px 4px; position:relative; width:100%; overflow:hidden; }
+    .bottom-nav { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #eee; display:grid; grid-template-columns:repeat(4,1fr); align-items:center; padding:6px 0 8px; z-index:999; box-shadow:0 -2px 10px rgba(0,0,0,0.05); }
+    .bottom-nav-btn { background:none; border:none; cursor:pointer; font-family:inherit; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:all 0.2s; padding:2px 4px; position:relative; width:100%; overflow:hidden; gap:1px; }
     .bottom-nav-btn > * { position: relative; z-index: 2; }
     .bottom-nav-btn .nav-icon-img { width: 52px; height: 52px; object-fit: contain; mix-blend-mode: multiply; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.7s ease, opacity 0.6s ease; display: block; pointer-events: none; background: transparent !important; }
     .bottom-nav-btn:hover .nav-icon-img { transform: translateY(-2px) scale(1.08); }
     .bottom-nav-btn.active .nav-icon-img { transform: scale(1.15); }
     .bottom-nav-btn:active .nav-icon-img { transform: scale(0.95); }
+
+    /* ===== NAV LABEL: Premium text under icon ===== */
+    .nav-label {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: #a89580;
+      line-height: 1;
+      margin-top: -2px;
+      transition: color 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    }
+    .bottom-nav-btn.active .nav-label {
+      color: #2A1F14;
+      transform: scale(1.06);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95), 0 1px 2px rgba(120,90,50,0.15);
+    }
+    .bottom-nav-btn:active .nav-label {
+      transform: scale(0.94);
+    }
     
     /* ===== OPTION A: Scale Down Press Effect ===== */
     .bottom-nav-btn.nav-btn-pressed .nav-icon-img {
@@ -354,7 +379,7 @@
       transition: transform 0.08s ease-out !important;
     }
     
-    @media (max-width: 400px) { .bottom-nav-btn .nav-icon-img { width: 46px; height: 46px; } }
+    @media (max-width: 400px) { .bottom-nav-btn .nav-icon-img { width: 46px; height: 46px; } .nav-label { font-size: 9.5px; letter-spacing: 0.5px; } }
     .tab-section { display:none; }
     .tab-section.active { display:block; }
     .file-input-wrapper { position:relative; display:inline-block; cursor:pointer; }
@@ -402,7 +427,7 @@
     .cart-item-qty button:hover { background:#1A1A1A; color:#fff; }
     .cart-item-remove { background:none; border:none; color:#FF4D4D; cursor:pointer; font-size:14px; }
     .cart-total { font-weight:800; font-size:18px; text-align:right; margin:12px 0; color:#000; }
-    .call-btn { position: fixed; bottom: 80px; right: 20px; width: 90px; height: 90px; background: transparent; border: none; box-shadow: none; cursor: pointer; z-index: 998; display: flex; align-items: center; justify-content: center; padding: 0; border-radius: 50%; overflow: visible; -webkit-appearance: none; appearance: none; }
+    .call-btn { position: fixed; bottom: 90px; right: 20px; width: 90px; height: 90px; background: transparent; border: none; box-shadow: none; cursor: pointer; z-index: 998; display: flex; align-items: center; justify-content: center; padding: 0; border-radius: 50%; overflow: visible; -webkit-appearance: none; appearance: none; }
     .book-table-sticker { position: relative; width: 92%; height: 92%; object-fit: contain; z-index: 2; pointer-events: none; mix-blend-mode: multiply; background: transparent !important; }
     .success-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); display:none; justify-content:center; align-items:center; z-index:2000; padding:20px; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
     .success-modal { background:#fff; border-radius:28px; max-width:380px; width:100%; padding:35px 30px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.3); position:relative; overflow:hidden; animation: successModalIn 0.5s cubic-bezier(0.34,1.56,0.64,1); }
@@ -418,7 +443,7 @@
     .success-loyalty { background: linear-gradient(145deg, #fff6d9 0%, #ffe9a8 100%); border: 2px solid #f5c94b; border-radius: 12px; padding: 10px 14px; margin-bottom: 20px; font-weight: 800; color: #7a5a10; text-align: center; font-size: 14px; box-shadow: 0 6px 14px rgba(217, 181, 138, 0.35); }
     .success-btn { background:#1A1A1A; color:#fff; border:none; border-radius:30px; padding:14px 24px; font-size:16px; font-weight:700; cursor:pointer; width:100%; transition:all 0.2s; }
     .success-btn:hover { background:#333; transform:translateY(-2px); box-shadow:0 6px 15px rgba(26,26,26,0.3); }
-    #toastContainer { position:fixed; bottom:100px; right:20px; z-index:3000; display:flex; flex-direction:column; gap:10px; pointer-events:none; }
+    #toastContainer { position:fixed; bottom:110px; right:20px; z-index:3000; display:flex; flex-direction:column; gap:10px; pointer-events:none; }
     .toast { background:#1A1A1A; color:#fff; padding:14px 20px; border-radius:30px; box-shadow:0 8px 20px rgba(0,0,0,0.2); display:flex; align-items:center; gap:12px; font-size:14px; font-weight:600; animation: toastIn 0.3s ease, toastOut 0.3s ease 2.5s forwards; pointer-events:auto; max-width:300px; }
     .toast.success { background:#4CAF50; }
     .toast.error { background:#FF4D4D; }
@@ -472,7 +497,7 @@
       .header { padding:12px 14px; height:80px; }
       main { padding:16px; }
       .success-modal { padding:25px 20px; }
-      #toastContainer { bottom:80px; right:10px; }
+      #toastContainer { bottom:90px; right:10px; }
       .wishlist { width: 34px; height: 34px; font-size: 17px; top: 10px; left: 10px; }
     }
     img { background: linear-gradient(145deg, #fdf6ec 0%, #f5e6d3 100%); }
@@ -831,15 +856,19 @@
   <nav class="bottom-nav" id="bottomNav">
     <button class="bottom-nav-btn active" data-target="menuSection" aria-label="Menu">
       <img class="nav-icon-img img-fade-in" src="/images/nav_menu.png" alt="Menu" />
+      <span class="nav-label">Menu</span>
     </button>
     <button class="bottom-nav-btn" data-target="gallerySection" aria-label="Gallery">
       <img class="nav-icon-img img-fade-in" src="/images/nav_gallery.png" alt="Gallery" />
+      <span class="nav-label">Gallery</span>
     </button>
     <button class="bottom-nav-btn" data-target="contactSection" aria-label="Info">
       <img class="nav-icon-img img-fade-in" src="/images/nav_info.png" alt="Info" />
+      <span class="nav-label">Info</span>
     </button>
     <button class="bottom-nav-btn" data-target="ordersSection" aria-label="Orders">
       <img class="nav-icon-img img-fade-in" src="/images/nav_orders.png" alt="Orders" />
+      <span class="nav-label">Orders</span>
     </button>
   </nav>
   <input type="file" id="editGalleryFileInput" accept="image/*" style="display:none" />
