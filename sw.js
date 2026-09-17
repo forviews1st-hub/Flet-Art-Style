@@ -1,8 +1,8 @@
-const CACHE_NAME = 'aura-cafe-v23';
-const OFFLINE_URL = '/offline.html';
+const CACHE_NAME = 'aura-cafe-v24';
+const OFFLINE_URL = '/offline';
 
 const PRECACHE_URLS = [
-  '/', '/index.html', '/offline.html', '/manifest.json',
+  '/', '/index.html', '/offline', '/offline.html', '/manifest.json',
   '/images/banner.png', '/images/book_table.png', '/images/card_frame.png',
   '/images/nav_menu.png', '/images/nav_gallery.png', '/images/nav_info.png', '/images/nav_orders.png',
   '/images/pepperoni_pizza.png', '/images/classic_cheeseburger.png',
@@ -52,11 +52,20 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
           return response;
         })
-        .catch(() =>
-          caches.match(req).then((cached) =>
+        .catch(() => {
+          const pathname = new URL(req.url).pathname;
+
+          // Agar user /offline pe ja raha hai, toh seedha offline page do
+          if (pathname === '/offline' || pathname === '/offline.html') {
+            return caches.match(OFFLINE_URL)
+              .then((r) => r || caches.match('/offline.html'))
+              .then((r) => r || caches.match('/index.html'));
+          }
+
+          return caches.match(req).then((cached) =>
             cached || caches.match('/index.html') || caches.match(OFFLINE_URL)
-          )
-        )
+          );
+        })
     );
     return;
   }
