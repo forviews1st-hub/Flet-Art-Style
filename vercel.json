@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/offline", "destination": "/offline.html" }
+  ]
+}
