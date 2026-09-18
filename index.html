@@ -7,6 +7,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="manifest" href="manifest.json" />
+  <!-- Critical images – pehle load karo -->
+  <link rel="preload" as="image" href="/images/card_frame.png" />
+  <link rel="preload" as="image" href="/images/banner.png" />
+  <link rel="preload" as="image" href="/images/nav_menu.png" />
+  <link rel="preload" as="image" href="/images/nav_gallery.png" />
+  <link rel="preload" as="image" href="/images/nav_info.png" />
+  <link rel="preload" as="image" href="/images/nav_orders.png" />
+  <link rel="preload" as="image" href="/images/book_table.png" />
+  <link rel="preload" as="image" href="/images/cart_icon.png" />
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     @font-face { font-family: 'Bluecherries'; src: url('fonts/blue_cheries/BLUECHERIES.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
@@ -1357,6 +1366,28 @@
     checkLogin();
     showProductSkeletons(6);
     setTimeout(function() { renderAll(); applyFadeInToAll(); }, 250);
+
+    /* ===== Background Prefetch: Baaki images chupke se download karo ===== */
+    setTimeout(function() {
+      var bgImages = [
+        '/images/pepperoni_pizza.png', '/images/classic_cheeseburger.png',
+        '/images/chocolate_banana_pancakes.png', '/images/classic_avocado_toast.png',
+        '/images/avocado_feta_toast.png', '/images/mixed_berry_pancakes.png',
+        '/images/lemon_lime_mint_cooler.png', '/images/coca_cola.png',
+        '/images/fresh_orange_juice.png', '/images/lemon_lime_berries.png',
+        '/images/coffee.png', '/images/blue_lemon_virgin_mojito.png',
+        '/images/chocolate_milkshake.png', '/images/watermelon_soda.png',
+        '/images/garden_fresh_vegetable_salad.png', '/images/creamy_vegetable_penne_pasta.png',
+        '/images/garlic_bread.png', '/images/chocolate_chip_cookie.png',
+        '/images/butter_croissant.png', '/images/chocolate_fudge_cake.png',
+        '/images/chocolate_sundae.png', '/images/veggie_supreme_pizza.png',
+        '/images/loaded_veggie_pizza.png', '/images/noodles.png'
+      ];
+      bgImages.forEach(function(src) {
+        var img = new Image();
+        img.src = src;
+      });
+    }, 500);
 
     var observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {

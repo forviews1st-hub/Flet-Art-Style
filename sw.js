@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aura-cafe-v24';
+const CACHE_NAME = 'aura-cafe-v25';
 const OFFLINE_URL = '/offline';
 
 const PRECACHE_URLS = [
@@ -54,14 +54,11 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() => {
           const pathname = new URL(req.url).pathname;
-
-          // Agar user /offline pe ja raha hai, toh seedha offline page do
           if (pathname === '/offline' || pathname === '/offline.html') {
             return caches.match(OFFLINE_URL)
               .then((r) => r || caches.match('/offline.html'))
               .then((r) => r || caches.match('/index.html'));
           }
-
           return caches.match(req).then((cached) =>
             cached || caches.match('/index.html') || caches.match(OFFLINE_URL)
           );
@@ -70,6 +67,38 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // ===== IMAGES: Cache-first (ek baar load hui, toh hamesha cache se aaye gi) =====
+  if (req.destination === 'image') {
+    event.respondWith(
+      caches.match(req).then((cached) => {
+        if (cached) {
+          // Cache se turant do, background mein update bhi karo
+          fetch(req).then((response) => {
+            if (response && response.status === 200) {
+              caches.open(CACHE_NAME).then((cache) => cache.put(req, response.clone()));
+            }
+          }).catch(() => {});
+          return cached;
+        }
+        // Cache mein nahi hai, network se lao
+        return fetch(req).then((response) => {
+          if (response && response.status === 200 && response.type === 'basic') {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
+          }
+          return response;
+        }).catch(() => {
+          return new Response(
+            '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdf6ec"/><stop offset="100%" stop-color="#f5e6d3"/></linearGradient></defs><rect width="200" height="200" fill="url(#g)"/><text x="100" y="115" font-size="70" text-anchor="middle">🍽️</text></svg>',
+            { headers: { 'Content-Type': 'image/svg+xml' } }
+          );
+        });
+      })
+    );
+    return;
+  }
+
+  // ===== Baaki sab (HTML, CSS, JS) ke liye normal cache-first =====
   event.respondWith(
     caches.match(req).then((cached) => {
       if (cached) return cached;
@@ -79,13 +108,6 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
         }
         return response;
-      }).catch(() => {
-        if (req.destination === 'image') {
-          return new Response(
-            '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fdf6ec"/><stop offset="100%" stop-color="#f5e6d3"/></linearGradient></defs><rect width="200" height="200" fill="url(#g)"/><text x="100" y="115" font-size="70" text-anchor="middle">🍽️</text></svg>',
-            { headers: { 'Content-Type': 'image/svg+xml' } }
-          );
-        }
       });
     })
   );
