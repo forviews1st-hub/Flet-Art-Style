@@ -146,48 +146,66 @@
       animation-play-state: paused;
     }
 
-    /* ===== BANNER + NAV BUTTONS: Premium glow + sparkle while loading (same as food cards) ===== */
+    /* ===== BANNER: Food card jaisa glow + sparkle (loading ke waqt) ===== */
     #promoBanner { position: relative; }
-    #promoBanner::before,
-    .bottom-nav-btn::before {
+    #promoBanner::before {
       content: '';
       position: absolute;
       inset: 0;
       z-index: 3;
       border-radius: inherit;
-      background: radial-gradient(circle at 50% 45%, rgba(255, 240, 210, 0.9) 0%, rgba(217, 181, 138, 0.55) 40%, rgba(217, 181, 138, 0.15) 70%, transparent 100%);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 240, 210, 0.95) 0%, rgba(217, 181, 138, 0.75) 35%, rgba(217, 181, 138, 0.35) 65%, transparent 100%),
+        linear-gradient(135deg, #fdf6ec 0%, #f5e6d3 45%, #ecdcc4 100%);
       opacity: 1;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.8s ease;
       pointer-events: none;
       animation: auraGlowPulse 2s ease-in-out infinite;
     }
-    #promoBanner::after,
-    .bottom-nav-btn::after {
+    #promoBanner::after {
       content: '';
       position: absolute;
       inset: 0;
       z-index: 4;
       border-radius: inherit;
       pointer-events: none;
-      opacity: 0.8;
-      transition: opacity 0.6s ease;
+      opacity: 1;
+      transition: opacity 0.8s ease;
       background-image:
         radial-gradient(3px 3px at 15% 25%, #ffe8b0 50%, transparent 51%),
         radial-gradient(2px 2px at 72% 55%, #ffd88a 50%, transparent 51%),
         radial-gradient(4px 4px at 42% 78%, #ffe8b0 50%, transparent 51%),
         radial-gradient(2px 2px at 88% 22%, #ffd88a 50%, transparent 51%),
         radial-gradient(3px 3px at 12% 68%, #ffe8b0 50%, transparent 51%),
-        radial-gradient(2px 2px at 58% 12%, #ffd88a 50%, transparent 51%);
+        radial-gradient(2px 2px at 58% 12%, #ffd88a 50%, transparent 51%),
+        radial-gradient(3px 3px at 92% 72%, #ffe8b0 50%, transparent 51%),
+        radial-gradient(2px 2px at 28% 48%, #ffd88a 50%, transparent 51%),
+        radial-gradient(3px 3px at 78% 38%, #ffe8b0 50%, transparent 51%),
+        radial-gradient(2px 2px at 48% 88%, #ffd88a 50%, transparent 51%),
+        radial-gradient(2px 2px at 65% 82%, #ffe8b0 50%, transparent 51%),
+        radial-gradient(3px 3px at 35% 15%, #ffd88a 50%, transparent 51%);
       background-size: 100% 100%;
-      filter: drop-shadow(0 0 4px rgba(255, 216, 138, 0.9)) drop-shadow(0 0 8px rgba(255, 200, 100, 0.5));
+      filter: drop-shadow(0 0 5px rgba(255, 216, 138, 0.95)) drop-shadow(0 0 10px rgba(255, 200, 100, 0.55));
       animation: dustSparkle 2.5s ease-in-out infinite;
     }
     #promoBanner.img-ready::before,
-    #promoBanner.img-ready::after,
-    .bottom-nav-btn.img-ready::before,
-    .bottom-nav-btn.img-ready::after {
+    #promoBanner.img-ready::after {
       opacity: 0;
       animation-play-state: paused;
+    }
+
+    /* ===== NAV BUTTONS: Icon ke around golden glow pulse (loading ke waqt) ===== */
+    .bottom-nav-btn .nav-icon-img.img-fade-in {
+      filter: blur(8px) drop-shadow(0 0 10px rgba(255, 220, 150, 0.95)) drop-shadow(0 0 20px rgba(217, 181, 138, 0.7)) drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+      animation: navGlowPulse 1.6s ease-in-out infinite;
+    }
+    .bottom-nav-btn .nav-icon-img.img-fade-in.loaded {
+      filter: blur(0) drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+      animation: none;
+    }
+    @keyframes navGlowPulse {
+      0%, 100% { filter: blur(8px) drop-shadow(0 0 10px rgba(255, 220, 150, 0.95)) drop-shadow(0 0 20px rgba(217, 181, 138, 0.7)) drop-shadow(0 2px 4px rgba(0,0,0,0.12)); }
+      50% { filter: blur(8px) drop-shadow(0 0 16px rgba(255, 240, 180, 1)) drop-shadow(0 0 32px rgba(217, 181, 138, 0.9)) drop-shadow(0 2px 4px rgba(0,0,0,0.12)); }
     }
 
     img.img-fade-in {
@@ -934,10 +952,27 @@
 
     function applyFadeIn(img) {
       if (!img) return;
+
+      function isSpecialElement(node) {
+        if (!node) return false;
+        if (node.id === 'promoBanner') return true;
+        if (node.classList && node.classList.contains('bottom-nav-btn')) return true;
+        return false;
+      }
+
+      function markReady(parent) {
+        if (!parent) return;
+        if (isSpecialElement(parent)) {
+          setTimeout(function() { parent.classList.add('img-ready'); }, 2000);
+        } else {
+          parent.classList.add('img-ready');
+        }
+      }
+
       if (img.classList.contains('img-fade-in')) {
         if (img.complete && img.naturalHeight !== 0) {
           img.classList.add('loaded');
-          if (img.parentNode) img.parentNode.classList.add('img-ready');
+          markReady(img.parentNode);
         }
         return;
       }
@@ -945,7 +980,7 @@
       img.classList.add('img-fade-in');
       function onLoaded() {
         img.classList.add('loaded');
-        if (img.parentNode) img.parentNode.classList.add('img-ready');
+        markReady(img.parentNode);
       }
       if (img.complete && img.naturalHeight !== 0) {
         onLoaded();
@@ -953,7 +988,7 @@
         img.addEventListener('load', onLoaded);
         img.addEventListener('error', function() {
           img.classList.add('loaded');
-          if (img.parentNode) img.parentNode.classList.add('img-ready');
+          markReady(img.parentNode);
         });
       }
     }
@@ -962,7 +997,13 @@
       document.querySelectorAll('img.img-fade-in:not(.loaded)').forEach(function(img) {
         if (img.complete && img.naturalHeight !== 0) {
           img.classList.add('loaded');
-          if (img.parentNode) img.parentNode.classList.add('img-ready');
+          if (img.parentNode) {
+            if (img.parentNode.id === 'promoBanner' || img.parentNode.classList.contains('bottom-nav-btn')) {
+              setTimeout(function() { img.parentNode.classList.add('img-ready'); }, 2000);
+            } else {
+              img.parentNode.classList.add('img-ready');
+            }
+          }
         }
       });
     }
