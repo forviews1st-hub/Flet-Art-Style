@@ -7,14 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="manifest" href="manifest.json" />
-  <!-- Critical images – pehle load karo -->
-  <link rel="preload" as="image" href="/images/banner.png" />
-  <link rel="preload" as="image" href="/images/nav_menu.png" />
-  <link rel="preload" as="image" href="/images/nav_gallery.png" />
-  <link rel="preload" as="image" href="/images/nav_info.png" />
-  <link rel="preload" as="image" href="/images/nav_orders.png" />
-  <link rel="preload" as="image" href="/images/book_table.png" />
-  <link rel="preload" as="image" href="/images/cart_icon.png" />
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     @font-face { font-family: 'Bluecherries'; src: url('fonts/blue_cheries/BLUECHERIES.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
@@ -144,68 +136,6 @@
     .card-img.img-ready::after {
       opacity: 0;
       animation-play-state: paused;
-    }
-
-    /* ===== BANNER: Food card jaisa glow + sparkle (loading ke waqt) ===== */
-    #promoBanner { position: relative; }
-    #promoBanner::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      border-radius: inherit;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(255, 240, 210, 0.95) 0%, rgba(217, 181, 138, 0.75) 35%, rgba(217, 181, 138, 0.35) 65%, transparent 100%),
-        linear-gradient(135deg, #fdf6ec 0%, #f5e6d3 45%, #ecdcc4 100%);
-      opacity: 1;
-      transition: opacity 0.8s ease;
-      pointer-events: none;
-      animation: auraGlowPulse 2s ease-in-out infinite;
-    }
-    #promoBanner::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 4;
-      border-radius: inherit;
-      pointer-events: none;
-      opacity: 1;
-      transition: opacity 0.8s ease;
-      background-image:
-        radial-gradient(3px 3px at 15% 25%, #ffe8b0 50%, transparent 51%),
-        radial-gradient(2px 2px at 72% 55%, #ffd88a 50%, transparent 51%),
-        radial-gradient(4px 4px at 42% 78%, #ffe8b0 50%, transparent 51%),
-        radial-gradient(2px 2px at 88% 22%, #ffd88a 50%, transparent 51%),
-        radial-gradient(3px 3px at 12% 68%, #ffe8b0 50%, transparent 51%),
-        radial-gradient(2px 2px at 58% 12%, #ffd88a 50%, transparent 51%),
-        radial-gradient(3px 3px at 92% 72%, #ffe8b0 50%, transparent 51%),
-        radial-gradient(2px 2px at 28% 48%, #ffd88a 50%, transparent 51%),
-        radial-gradient(3px 3px at 78% 38%, #ffe8b0 50%, transparent 51%),
-        radial-gradient(2px 2px at 48% 88%, #ffd88a 50%, transparent 51%),
-        radial-gradient(2px 2px at 65% 82%, #ffe8b0 50%, transparent 51%),
-        radial-gradient(3px 3px at 35% 15%, #ffd88a 50%, transparent 51%);
-      background-size: 100% 100%;
-      filter: drop-shadow(0 0 5px rgba(255, 216, 138, 0.95)) drop-shadow(0 0 10px rgba(255, 200, 100, 0.55));
-      animation: dustSparkle 2.5s ease-in-out infinite;
-    }
-    #promoBanner.img-ready::before,
-    #promoBanner.img-ready::after {
-      opacity: 0;
-      animation-play-state: paused;
-    }
-
-    /* ===== NAV BUTTONS: Icon ke around golden glow pulse (loading ke waqt) ===== */
-    .bottom-nav-btn .nav-icon-img.img-fade-in {
-      filter: blur(8px) drop-shadow(0 0 10px rgba(255, 220, 150, 0.95)) drop-shadow(0 0 20px rgba(217, 181, 138, 0.7)) drop-shadow(0 2px 4px rgba(0,0,0,0.12));
-      animation: navGlowPulse 1.6s ease-in-out infinite;
-    }
-    .bottom-nav-btn .nav-icon-img.img-fade-in.loaded {
-      filter: blur(0) drop-shadow(0 2px 4px rgba(0,0,0,0.12));
-      animation: none;
-    }
-    @keyframes navGlowPulse {
-      0%, 100% { filter: blur(8px) drop-shadow(0 0 10px rgba(255, 220, 150, 0.95)) drop-shadow(0 0 20px rgba(217, 181, 138, 0.7)) drop-shadow(0 2px 4px rgba(0,0,0,0.12)); }
-      50% { filter: blur(8px) drop-shadow(0 0 16px rgba(255, 240, 180, 1)) drop-shadow(0 0 32px rgba(217, 181, 138, 0.9)) drop-shadow(0 2px 4px rgba(0,0,0,0.12)); }
     }
 
     img.img-fade-in {
@@ -952,27 +882,10 @@
 
     function applyFadeIn(img) {
       if (!img) return;
-
-      function isSpecialElement(node) {
-        if (!node) return false;
-        if (node.id === 'promoBanner') return true;
-        if (node.classList && node.classList.contains('bottom-nav-btn')) return true;
-        return false;
-      }
-
-      function markReady(parent) {
-        if (!parent) return;
-        if (isSpecialElement(parent)) {
-          setTimeout(function() { parent.classList.add('img-ready'); }, 2000);
-        } else {
-          parent.classList.add('img-ready');
-        }
-      }
-
       if (img.classList.contains('img-fade-in')) {
         if (img.complete && img.naturalHeight !== 0) {
           img.classList.add('loaded');
-          markReady(img.parentNode);
+          if (img.parentNode) img.parentNode.classList.add('img-ready');
         }
         return;
       }
@@ -980,7 +893,7 @@
       img.classList.add('img-fade-in');
       function onLoaded() {
         img.classList.add('loaded');
-        markReady(img.parentNode);
+        if (img.parentNode) img.parentNode.classList.add('img-ready');
       }
       if (img.complete && img.naturalHeight !== 0) {
         onLoaded();
@@ -988,7 +901,7 @@
         img.addEventListener('load', onLoaded);
         img.addEventListener('error', function() {
           img.classList.add('loaded');
-          markReady(img.parentNode);
+          if (img.parentNode) img.parentNode.classList.add('img-ready');
         });
       }
     }
@@ -997,13 +910,7 @@
       document.querySelectorAll('img.img-fade-in:not(.loaded)').forEach(function(img) {
         if (img.complete && img.naturalHeight !== 0) {
           img.classList.add('loaded');
-          if (img.parentNode) {
-            if (img.parentNode.id === 'promoBanner' || img.parentNode.classList.contains('bottom-nav-btn')) {
-              setTimeout(function() { img.parentNode.classList.add('img-ready'); }, 2000);
-            } else {
-              img.parentNode.classList.add('img-ready');
-            }
-          }
+          if (img.parentNode) img.parentNode.classList.add('img-ready');
         }
       });
     }
@@ -1450,28 +1357,6 @@
     checkLogin();
     showProductSkeletons(6);
     setTimeout(function() { renderAll(); applyFadeInToAll(); }, 250);
-
-    /* ===== Background Prefetch: Baaki images chupke se download karo ===== */
-    setTimeout(function() {
-      var bgImages = [
-        '/images/pepperoni_pizza.png', '/images/classic_cheeseburger.png',
-        '/images/chocolate_banana_pancakes.png', '/images/classic_avocado_toast.png',
-        '/images/avocado_feta_toast.png', '/images/mixed_berry_pancakes.png',
-        '/images/lemon_lime_mint_cooler.png', '/images/coca_cola.png',
-        '/images/fresh_orange_juice.png', '/images/lemon_lime_berries.png',
-        '/images/coffee.png', '/images/blue_lemon_virgin_mojito.png',
-        '/images/chocolate_milkshake.png', '/images/watermelon_soda.png',
-        '/images/garden_fresh_vegetable_salad.png', '/images/creamy_vegetable_penne_pasta.png',
-        '/images/garlic_bread.png', '/images/chocolate_chip_cookie.png',
-        '/images/butter_croissant.png', '/images/chocolate_fudge_cake.png',
-        '/images/chocolate_sundae.png', '/images/veggie_supreme_pizza.png',
-        '/images/loaded_veggie_pizza.png', '/images/noodles.png'
-      ];
-      bgImages.forEach(function(src) {
-        var img = new Image();
-        img.src = src;
-      });
-    }, 500);
 
     var observer = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
